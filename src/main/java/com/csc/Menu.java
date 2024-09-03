@@ -1,27 +1,46 @@
 package com.csc;
 
-// Your code goes here!
 import java.util.Scanner;
 
-public class Menu {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+public class InputTest {
 
-        System.out.println("Welcome to the Java Menu!!!");
+    public static int userTest() {
+        Scanner scanner = new Scanner(System.in);
+        int n;
+        String prompt = "Please enter a number between 1 to 100:";
+        String error = "Invalid number, try again";
+        int lowerBound = 1;
+        int upperBound = 100;
 
-        for (int i = 1; i <= 2; i++) {
-            System.out.println("Enter the number between 1 and 100: ");
-            int n = sc.nextInt();
+        while (true) {
+            System.out.print(prompt);
 
-            if (n > 0 && n < 101) {
-                System.out.println("You entered: " + n);
-                break;
-            }  else {
-                System.out.println("Invalid number! Please try again.");
-                i--;
+            if (scanner.hasNextInt()) {
+                n = scanner.nextInt();
+
+                boolean isValid = true;
+                if (n < lowerBound) {
+                    isValid = false;
+                }
+                if (n > upperBound) {
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    return n;
+                } else {
+                    System.out.println(error);
+                }
+            } else {
+                System.out.println(error);
+                scanner.next();
             }
         }
+    }
 
-        sc.close();
+    public static void main(String[] args) {
+        int result = userTest();
+        System.out.println("You entered: " + result);
     }
 }
+
